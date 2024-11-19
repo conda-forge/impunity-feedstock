@@ -1,5 +1,6 @@
 {% set name = "impunity" %}
 {% set version = "1.0.5" %}
+{% set python_min = "3.9" %}
 
 package:
   name: {{ name|lower }}
@@ -16,14 +17,14 @@ build:
 
 requirements:
   host:
-    - python >=3.8,<4.0
-    - poetry-core >=1.0.0
+    - python {{ python_min }}
+    - hatchling
     - pip
   run:
-    - python >=3.8,<4.0
-    - pint >=0.19.2
+    - python >={{ python_min }}
+    - pint >=0.24.4
     - astor >=0.8.1
-    - typing-extensions >=4.2.0,<5.0.0
+    - typing-extensions >=4.12.2,<5.0.0
 
 test:
   imports:
@@ -31,8 +32,9 @@ test:
   commands:
     - pip check
   requires:
+    - python {{ python_min }}
     - pip
-
+    
 about:
   home: https://github.com/achevrot/impunity
   summary: Static checking for consistency of physical units
